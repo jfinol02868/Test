@@ -1,9 +1,6 @@
 package mokito;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -32,6 +29,21 @@ class ValidNumberTest {
     }
 
     @Test
+    void checkZeroTest() {
+        assertEquals(true ,validNumber.checkZero(-57));
+    }
+
+    @Test
+    void checkZeroStringTest() {
+        assertEquals(false, validNumber.checkZero("5"));
+    }
+
+    @Test
+    void checkZero0Test() {
+        assertThrows(ArithmeticException.class, () -> validNumber.checkZero(0));
+    }
+
+    @Test
     void checkNegativeTest() {
         assertFalse(validNumber.check(-5));
     }
@@ -39,6 +51,16 @@ class ValidNumberTest {
     @Test
     void checkIsNotNumberTest() {
         assertFalse(validNumber.check("Hello"));
+    }
+
+    @Test
+    void doubleToIntTest() {
+        assertInstanceOf(Integer.class, validNumber.doubleToInt(2.5));
+    }
+
+    @Test
+    void doubleToIntErrorTest() {
+        assertEquals(0, validNumber.doubleToInt("a"));
     }
 
     @Test
